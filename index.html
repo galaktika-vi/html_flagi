@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Блог с 203 ячейками</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    #search-bar {
+      display: flex;
+      justify-content: flex-end;
+      padding: 20px;
+    }
+    #search-input {
+      width: 300px;
+      height: 30px;
+    }
+    #blog-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      margin: 20px;
+    }
+    .blog-post {
+      border: 1px solid blue;
+      width: 200px;
+      height: 160px;
+      padding: 10px;
+      margin: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border-radius: 10px;
+    }
+    .blog-post img {
+      width: 100%;
+      height: 80%;
+      object-fit: cover;
+      cursor: pointer;  
+    }
+    .blog-post span {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    #fullscreen-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .fullscreen-image {
+      max-width: 80%;
+      max-height: 80%;
+      border: 35px solid white;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="search-bar">
+    <select id="country-select">
+      <option value="">Выберите страну</option>
+      <option value="Абхазия">Абхазия</option>
+<option value="Австралия">Австралия</option>
+<option value="Австрия">Австрия</option>
+<option value="Азербайджан">Азербайджан</option>
+<option value="Албания">Албания</option>
+<option value="Алжир">Алжир</option>
+<option value="Англия">Англия</option>
+<option value="Ангола">Ангола</option>
+<option value="Андорра">Андорра</option>
+<option value="Антигуа и Барбуда">Антигуа и Барбуда</option>
+<option value="Аргентина">Аргентина</option>
+<option value="Армения">Армения</option>
+<option value="Афганистан">Афганистан</option>
+<option value="Багамские острова">Багамские острова</option>
+<option value="Бангладеш">Бангладеш</option>
+<option value="Барбадос">Барбадос</option>
+<option value="Бахрейн">Бахрейн</option>
+<option value="Беларусь">Беларусь</option>
+<option value="Белиз">Белиз</option>
+<option value="Бельгия">Бельгия</option>
+<option value="Бенин">Бенин</option>
+<option value="Болгария">Болгария</option>
+<option value="Боливия">Боливия</option>
+<option value="Босния и Герцеговина">Босния и Герцеговина</option>
+<option value="Ботсвана">Ботсвана</option>
+<option value="Бразилия">Бразилия</option>
+<option value="Британские Виргинские острова">Британские Виргинские острова</option>
+<option value="Бруней">Бруней</option>
+<option value="Буркина-Фасо">Буркина-Фасо</option>
+<option value="Бурунди">Бурунди</option>
+<option value="Бутан">Бутан</option>
+<option value="Вануату">Вануату</option>
+<option value="Ватикан">Ватикан</option>
+<option value="Великобритания">Великобритания</option>
+<option value="Венгрия">Венгрия</option>
+<option value="Венесуэла">Венесуэла</option>
+<option value="Восточный Тимор">Восточный Тимор</option>
+<option value="Вьетнам">Вьетнам</option>
+<option value="Габон">Габон</option>
+<option value="Гаити">Гаити</option>
+<option value="Гайана">Гайана</option>
+<option value="Гамбия">Гамбия</option>
+<option value="Гана">Гана</option>
+<option value="Гватемала">Гватемала</option>
+<option value="Гвинея">Гвинея</option>
+<option value="Гвинея-Бисау">Гвинея-Бисау</option>
+<option value="Германия">Германия</option>
+<option value="Гибралтар">Гибралтар</option>
+<option value="Гондурас">Гондурас</option>
+<option value="Гонконг">Гонконг</option>
+<option value="Гренада">Гренада</option>
+<option value="Гренландия">Гренландия</option>
+<option value="Греция">Греция</option>
+<option value="Грузия">Грузия</option>
+<option value="Дания">Дания</option>
+<option value="Джибути">Джибути</option>
+<option value="Доминика">Доминика</option>
+<option value="Доминиканская Республика">Доминиканская Республика</option>
+<option value="Египет">Египет</option>
+<option value="Замбия">Замбия</option>
+<option value="Зимбабве">Зимбабве</option>
+<option value="Израиль">Израиль</option>
+<option value="Индия">Индия</option>
+<option value="Индонезия">Индонезия</option>
+<option value="Иордания">Иордания</option>
+<option value="Ирак">Ирак</option>
+<option value="Иран">Иран</option>
+<option value="Йемен">Йемен</option>
+<option value="Кабо-Верде">Кабо-Верде</option>
+<option value="Казахстан">Казахстан</option>
+<option value="Камбоджа">Камбоджа</option>
+<option value="Камерун">Камерун</option>
+<option value="Канада">Канада</option>
+<option value="Катар">Катар</option>
+<option value="Кения">Кения</option>
+<option value="Кипр">Кипр</option>
+<option value="Киргизия">Киргизия</option>
+<option value="Кирибати">Кирибати</option>
+<option value="Китай">Китай</option>
+<option value="КНДР">КНДР</option>
+<option value="Колумбия">Колумбия</option>
+<option value="Коморские острова">Коморские острова</option>
+<option value="Конго">Конго</option>
+<option value="Конго Демократическая Республика">Конго Демократическая Республика</option>
+<option value="Королевство Эсватини">Королевство Эсватини</option>
+<option value="Коста-Рика">Коста-Рика</option>
+<option value="Кот-д`Ивуар">Кот-д`Ивуар</option>
+<option value="Куба">Куба</option>
+<option value="Кувейт">Кувейт</option>
+<option value="Лаос">Лаос</option>
+<option value="Латвия">Латвия</option>
+<option value="Лесото">Лесото</option>
+<option value="Либерия">Либерия</option>
+<option value="Ливан">Ливан</option>
+<option value="Ливия">Ливия</option>
+<option value="Литва">Литва</option>
+<option value="Лихтенштейн">Лихтенштейн</option>
+<option value="Люксембург">Люксембург</option>
+<option value="Маврикий">Маврикий</option>
+<option value="Мавритания">Мавритания</option>
+<option value="Мадагаскар">Мадагаскар</option>
+<option value="Македония">Македония</option>
+<option value="Малави">Малави</option>
+<option value="Малайзия">Малайзия</option>
+<option value="Мали">Мали</option>
+<option value="Марокко">Марокко</option>
+<option value="Маршалловы острова">Маршалловы острова</option>
+<option value="Мексика">Мексика</option>
+<option value="Микронезия">Микронезия</option>
+<option value="Мозамбик">Мозамбик</option>
+<option value="Молдавия">Молдавия</option>
+<option value="Монако">Монако</option>
+<option value="Монголия">Монголия</option>
+<option value="Мьянма">Мьянма</option>
+<option value="Намибия">Намибия</option>
+<option value="Нарния">Нарния</option>
+<option value="Науру">Науру</option>
+<option value="Непал">Непал</option>
+<option value="Нигер">Нигер</option>
+<option value="Нигерия">Нигерия</option>
+<option value="Нидерланды">Нидерланды</option>
+<option value="Никарагуа">Никарагуа</option>
+<option value="Новая Зеландия">Новая Зеландия</option>
+<option value="Норвегия">Норвегия</option>
+<option value="ОАЭ">ОАЭ</option>
+<option value="Оман">Оман</option>
+<option value="Пакистан">Пакистан</option>
+<option value="Палау">Палау</option>
+<option value="Палестина">Палестина</option>
+<option value="Панама">Панама</option>
+<option value="Папуа-Новая Гвинея">Папуа-Новая Гвинея</option>
+<option value="Парагвай">Парагвай</option>
+<option value="Перу">Перу</option>
+<option value="Польша">Польша</option>
+<option value="Португалия">Португалия</option>
+<option value="Приднестровская Молдавская Республика">Приднестровская Молдавская Республика</option>
+<option value="Пуэрто-Рико">Пуэрто-Рико</option>
+<option value="Россия">Россия</option>
+<option value="Руанда">Руанда</option>
+<option value="Румыния">Румыния</option>
+<option value="Сальвадор">Сальвадор</option>
+<option value="Самоа">Самоа</option>
+<option value="Сан-Марино">Сан-Марино</option>
+<option value="Сан-Томе и Принсипи">Сан-Томе и Принсипи</option>
+<option value="Саудовская Аравия">Саудовская Аравия</option>
+<option value="Сейшельские острова">Сейшельские острова</option>
+<option value="Сенегал">Сенегал</option>
+<option value="Сент-Винсент и Гренадина">Сент-Винсент и Гренадина</option>
+<option value="Сент-Китс и Невис">Сент-Китс и Невис</option>
+<option value="Сент-Люсия">Сент-Люсия</option>
+<option value="Сербия">Сербия</option>
+<option value="Сингапур">Сингапур</option>
+<option value="Сирия">Сирия</option>
+<option value="Словакия">Словакия</option>
+<option value="Словения">Словения</option>
+<option value="Соломоновы острова">Соломоновы острова</option>
+<option value="Сомали">Сомали</option>
+<option value="Судан">Судан</option>
+<option value="Суринам">Суринам</option>
+<option value="США">США</option>
+<option value="Сьерра-Леоне">Сьерра-Леоне</option>
+<option value="Таджикистан">Таджикистан</option>
+<option value="Таиланд">Таиланд</option>
+<option value="Тайвань">Тайвань</option>
+<option value="Танзания">Танзания</option>
+<option value="Того">Того</option>
+<option value="Тонга">Тонга</option>
+<option value="Тринидад и Тобаго">Тринидад и Тобаго</option>
+<option value="Тувалу">Тувалу</option>
+<option value="Тунис">Тунис</option>
+<option value="Туркменистан">Туркменистан</option>
+<option value="Турция">Турция</option>
+<option value="Уганда">Уганда</option>
+<option value="Узбекистан">Узбекистан</option>
+<option value="Украина">Украина</option>
+<option value="Уругвай">Уругвай</option>
+<option value="Уэльса">Уэльса</option>
+<option value="Фарерские острова">Фарерские острова</option>
+<option value="Фиджи">Фиджи</option>
+<option value="Филиппины">Филиппины</option>
+<option value="Финляндия">Финляндия</option>
+<option value="Франция">Франция</option>
+<option value="Хорватия">Хорватия</option>
+<option value="Центрально-Африканская Республика">Центрально-Африканская Республика</option>
+<option value="Чад">Чад</option>
+<option value="Черногория">Черногория</option>
+<option value="Чехия">Чехия</option>
+<option value="Чили">Чили</option>
+<option value="Швейцария">Швейцария</option>
+<option value="Швеция">Швеция</option>
+<option value="Шотландия">Шотландия</option>
+<option value="Шри-Ланка">Шри-Ланка</option>
+<option value="Эквадор">Эквадор</option>
+<option value="Экваториальная Гвинея">Экваториальная Гвинея</option>
+<option value="Эритрея">Эритрея</option>
+<option value="Эстония">Эстония</option>
+<option value="Эфиопия">Эфиопия</option>
+<option value="ЮАР">ЮАР</option>
+<option value="Южная Корея">Южная Корея</option>
+<option value="Южная Осетия">Южная Осетия</option>
+<option value="Южный Судан">Южный Судан</option>
+<option value="Ямайка">Ямайка</option>
+<option value="Япония">Япония</option>
+
+    </select>
+  </div>
+  <div id="blog-content">
+    <div class="blog-post">
+      <img src="images/Абхазия.jpg" onclick="showFullscreen('Абхазия')">
+      <span>Абхазия</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Австралия.jpg" onclick="showFullscreen('Австралия')">
+      <span>Австралия</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Австрия.jpg" onclick="showFullscreen('Австрия')">
+      <span>Австрия</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Азербайджан.jpg" onclick="showFullscreen('Азербайджан')">
+      <span>Азербайджан</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Албания.jpg" onclick="showFullscreen('Албания')">
+      <span>Албания</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Алжир.jpg" onclick="showFullscreen('Алжир')">
+      <span>Алжир</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Англия.jpg" onclick="showFullscreen('Англия')">
+      <span>Англия</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Ангола.jpg" onclick="showFullscreen('Ангола')">
+      <span>Ангола</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Андорра.jpg" onclick="showFullscreen('Андорра')">
+      <span>Андорра</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Антигуа и Барбуда.jpg" onclick="showFullscreen('Антигуа и Барбуда')">
+      <span>Антигуа и Барбуда</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Аргентина.jpg" onclick="showFullscreen('Аргентина')">
+      <span>Аргентина</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Армения.jpg" onclick="showFullscreen('Армения')">
+      <span>Армения</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Афганистан.jpg" onclick="showFullscreen('Афганистан')">
+      <span>Афганистан</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Багамские острова.jpg" onclick="showFullscreen('Багамские острова')">
+      <span>Багамские острова</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Бангладеш.jpg" onclick="showFullscreen('Бангладеш')">
+      <span>Бангладеш</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Барбадос.jpg" onclick="showFullscreen('Барбадос')">
+      <span>Барбадос</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Бахрейн.jpg" onclick="showFullscreen('Бахрейн')">
+      <span>Бахрейн</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Беларусь.jpg" onclick="showFullscreen('Беларусь')">
+      <span>Беларусь</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Белиз.jpg" onclick="showFullscreen('Белиз')">
+      <span>Белиз</span>
+    </div>
+	<div class="blog-post">
+      <img src="images/Бельгия.jpg" onclick="showFullscreen('Бельгия')">
+      <span>Бельгия</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Бенин.jpg" onclick="showFullscreen('Бенин')">
+      <span>Бенин</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Болгария.jpg" onclick="showFullscreen('Болгария')">
+      <span>Болгария</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Боливия.jpg" onclick="showFullscreen('Боливия')">
+      <span>Боливия</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Босния и Герцеговина.jpg" onclick="showFullscreen('Босния и Герцеговина')">
+      <span>Босния и Герцеговина</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Ботсвана.jpg" onclick="showFullscreen('Ботсвана')">
+      <span>Ботсвана</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Бразилия.jpg" onclick="showFullscreen('Бразилия')">
+      <span>Бразилия</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Британские Виргинские острова.jpg" onclick="showFullscreen('Британские Виргинские острова')">
+      <span>Британские Виргинские острова</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Бруней.jpg" onclick="showFullscreen('Бруней')">
+      <span>Бруней</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Буркина-Фасо.jpg" onclick="showFullscreen('Буркина-Фасо')">
+      <span>Буркина-Фасо</span>
+    </div>
+	<div class="blog-post">
+      <img src="images/Бурунди.jpg" onclick="showFullscreen('Бурунди')">
+      <span>Бурунди</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Бутан.jpg" onclick="showFullscreen('Бутан')">
+      <span>Бутан</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Вануату.jpg" onclick="showFullscreen('Вануату')">
+      <span>Вануату</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Ватикан.jpg" onclick="showFullscreen('Ватикан')">
+      <span>Ватикан</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Великобритания.jpg" onclick="showFullscreen('Великобритания')">
+      <span>Великобритания</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Венгрия.jpg" onclick="showFullscreen('Венгрия')">
+      <span>Венгрия</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Венесуэла.jpg" onclick="showFullscreen('Венесуэла')">
+      <span>Венесуэла</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Восточный Тимор.jpg" onclick="showFullscreen('Восточный Тимор')">
+      <span>Восточный Тимор</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Вьетнам.jpg" onclick="showFullscreen('Вьетнам')">
+      <span>Вьетнам</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Габон.jpg" onclick="showFullscreen('Габон')">
+      <span>Габон</span>
+    </div>
+	<div class="blog-post">
+      <img src="images/Гаити.jpg" onclick="showFullscreen('Гаити')">
+      <span>Гаити</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Гайана.jpg" onclick="showFullscreen('Гайана')">
+      <span>Гайана</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Гамбия.jpg" onclick="showFullscreen('Гамбия')">
+      <span>Гамбия</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Гана.jpg" onclick="showFullscreen('Гана')">
+      <span>Гана</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Гватемала.jpg" onclick="showFullscreen('Гватемала')">
+      <span>Гватемала</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Гвинея.jpg" onclick="showFullscreen('Гвинея')">
+      <span>Гвинея</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Гвинея-Бисау.jpg" onclick="showFullscreen('Гвинея-Бисау')">
+      <span>Гвинея-Бисау</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Германия.jpg" onclick="showFullscreen('Германия')">
+      <span>Германия</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Гибралтар.jpg" onclick="showFullscreen('Гибралтар')">
+      <span>Гибралтар</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Гондурас.jpg" onclick="showFullscreen('Гондурас')">
+      <span>Гондурас</span>
+    </div>
+	<div class="blog-post">
+      <img src="images/Гонконг.jpg" onclick="showFullscreen('Гонконг')">
+      <span>Гонконг</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Гренада.jpg" onclick="showFullscreen('Гренада')">
+      <span>Гренада</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Гренландия.jpg" onclick="showFullscreen('Гренландия')">
+      <span>Гренландия</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Греция.jpg" onclick="showFullscreen('Греция')">
+      <span>Греция</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Грузия.jpg" onclick="showFullscreen('Грузия')">
+      <span>Грузия</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Дания.jpg" onclick="showFullscreen('Дания')">
+      <span>Дания</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Джибути.jpg" onclick="showFullscreen('Джибути')">
+      <span>Джибути</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Доминика.jpg" onclick="showFullscreen('Доминика')">
+      <span>Доминика</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Доминиканская Республика.jpg" onclick="showFullscreen('Доминиканская Республика')">
+      <span>Доминиканская Республика</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Египет.jpg" onclick="showFullscreen('Египет')">
+      <span>Египет</span>
+    </div>
+	<div class="blog-post">
+      <img src="images/Замбия.jpg" onclick="showFullscreen('Замбия')">
+      <span>Замбия</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Зимбабве.jpg" onclick="showFullscreen('Зимбабве')">
+      <span>Зимбабве</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Израиль.jpg" onclick="showFullscreen('Израиль')">
+      <span>Израиль</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Индия.jpg" onclick="showFullscreen('Индия')">
+      <span>Индия</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Индонезия.jpg" onclick="showFullscreen('Индонезия')">
+      <span>Индонезия</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Иордания.jpg" onclick="showFullscreen('Иордания')">
+      <span>Иордания</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Ирак.jpg" onclick="showFullscreen('Ирак')">
+      <span>Ирак</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Иран.jpg" onclick="showFullscreen('Иран')">
+      <span>Иран</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Йемен.jpg" onclick="showFullscreen('Йемен')">
+      <span>Йемен</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Кабо-Верде.jpg" onclick="showFullscreen('Кабо-Верде')">
+      <span>Кабо-Верде</span>
+    </div>
+	<div class="blog-post">
+      <img src="images/Казахстан.jpg" onclick="showFullscreen('Казахстан')">
+      <span>Казахстан</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Камбоджа.jpg" onclick="showFullscreen('Камбоджа')">
+      <span>Камбоджа</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Камерун.jpg" onclick="showFullscreen('Камерун')">
+      <span>Камерун</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Канада.jpg" onclick="showFullscreen('Канада')">
+      <span>Канада</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Катар.jpg" onclick="showFullscreen('Катар')">
+      <span>Катар</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Кения.jpg" onclick="showFullscreen('Кения')">
+      <span>Кения</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Кипр.jpg" onclick="showFullscreen('Кипр')">
+      <span>Кипр</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Киргизия.jpg" onclick="showFullscreen('Киргизия')">
+      <span>Киргизия</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Кирибати.jpg" onclick="showFullscreen('Кирибати')">
+      <span>Кирибати</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Китай.jpg" onclick="showFullscreen('Китай')">
+      <span>Китай</span>
+    </div>
+	<div class="blog-post">
+      <img src="images/КНДР.jpg" onclick="showFullscreen('КНДР')">
+      <span>КНДР</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Колумбия.jpg" onclick="showFullscreen('Колумбия')">
+      <span>Колумбия</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Коморские острова.jpg" onclick="showFullscreen('Коморские острова')">
+      <span>Коморские острова</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Конго.jpg" onclick="showFullscreen('Конго')">
+      <span>Конго</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Конго Демократическая Республика.jpg" onclick="showFullscreen('Конго Демократическая Республика')">
+      <span>Конго Демократическая Республика</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Королевство Эсватини.jpg" onclick="showFullscreen('Королевство Эсватини')">
+      <span>Королевство Эсватини</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Коста-Рика.jpg" onclick="showFullscreen('Коста-Рика')">
+      <span>Коста-Рика</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Кот-д`Ивуар.jpg" onclick="showFullscreen('Кот-д`Ивуар')">
+      <span>Кот-д`Ивуар</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Куба.jpg" onclick="showFullscreen('Куба')">
+      <span>Куба</span>
+    </div>
+<div class="blog-post">
+      <img src="images/Кувейт.jpg" onclick="showFullscreen('Кувейт')">
+      <span>Кувейт</span>
+    </div>
+<div class="blog-post">
+<img src="images/Лаос.jpg" onclick="showFullscreen('Лаос')">	
+	<span>Лаос</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Латвия.jpg" onclick="showFullscreen('Латвия')">	
+	<span>Латвия</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Лесото.jpg" onclick="showFullscreen('Лесото')">	
+	<span>Лесото</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Либерия.jpg" onclick="showFullscreen('Либерия')">	
+	<span>Либерия</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Ливан.jpg" onclick="showFullscreen('Ливан')">	
+	<span>Ливан</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Ливия.jpg" onclick="showFullscreen('Ливия')">	
+	<span>Ливия</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Литва.jpg" onclick="showFullscreen('Литва')">	
+	<span>Литва</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Лихтенштейн.jpg" onclick="showFullscreen('Лихтенштейн')">	
+	<span>Лихтенштейн</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Люксембург.jpg" onclick="showFullscreen('Люксембург')">	
+	<span>Люксембург</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Маврикий.jpg" onclick="showFullscreen('Маврикий')">	
+	<span>Маврикий</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Мавритания.jpg" onclick="showFullscreen('Мавритания')">	
+	<span>Мавритания</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Мадагаскар.jpg" onclick="showFullscreen('Мадагаскар')">	
+	<span>Мадагаскар</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Македония.jpg" onclick="showFullscreen('Македония')">	
+	<span>Македония</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Малави.jpg" onclick="showFullscreen('Малави')">	
+	<span>Малави</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Малайзия.jpg" onclick="showFullscreen('Малайзия')">	
+	<span>Малайзия</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Мали.jpg" onclick="showFullscreen('Мали')">	
+	<span>Мали</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Марокко.jpg" onclick="showFullscreen('Марокко')">	
+	<span>Марокко</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Маршалловы острова.jpg" onclick="showFullscreen('Маршалловы острова')">	
+	<span>Маршалловы острова</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Мексика.jpg" onclick="showFullscreen('Мексика')">	
+	<span>Мексика</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Микронезия.jpg" onclick="showFullscreen('Микронезия')">	
+	<span>Микронезия</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Мозамбик.jpg" onclick="showFullscreen('Мозамбик')">	
+	<span>Мозамбик</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Молдавия.jpg" onclick="showFullscreen('Молдавия')">	
+	<span>Молдавия</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Монако.jpg" onclick="showFullscreen('Монако')">	
+	<span>Монако</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Монголия.jpg" onclick="showFullscreen('Монголия')">	
+	<span>Монголия</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Мьянма.jpg" onclick="showFullscreen('Мьянма')">	
+	<span>Мьянма</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Намибия.jpg" onclick="showFullscreen('Намибия')">	
+	<span>Намибия</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Нарния.jpg" onclick="showFullscreen('Нарния')">	
+	<span>Нарния</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Науру.jpg" onclick="showFullscreen('Науру')">	
+	<span>Науру</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Непал.jpg" onclick="showFullscreen('Непал')">	
+	<span>Непал</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Нигер.jpg" onclick="showFullscreen('Нигер')">	
+	<span>Нигер</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Нигерия.jpg" onclick="showFullscreen('Нигерия')">	
+	<span>Нигерия</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Нидерланды.jpg" onclick="showFullscreen('Нидерланды')">	
+	<span>Нидерланды</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Никарагуа.jpg" onclick="showFullscreen('Никарагуа')">	
+	<span>Никарагуа</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Новая Зеландия.jpg" onclick="showFullscreen('Новая Зеландия')">	
+	<span>Новая Зеландия</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Норвегия.jpg" onclick="showFullscreen('Норвегия')">	
+	<span>Норвегия</span>
+	    </div>
+<div class="blog-post">
+<img src="images/ОАЭ.jpg" onclick="showFullscreen('ОАЭ')">	
+	<span>ОАЭ</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Оман.jpg" onclick="showFullscreen('Оман')">	
+	<span>Оман</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Пакистан.jpg" onclick="showFullscreen('Пакистан')">	
+	<span>Пакистан</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Палау.jpg" onclick="showFullscreen('Палау')">	
+	<span>Палау</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Палестина.jpg" onclick="showFullscreen('Палестина')">	
+	<span>Палестина</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Панама.jpg" onclick="showFullscreen('Панама')">	
+	<span>Панама</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Папуа-Новая Гвинея.jpg" onclick="showFullscreen('Папуа-Новая Гвинея')">	
+	<span>Папуа-Новая Гвинея</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Парагвай.jpg" onclick="showFullscreen('Парагвай')">	
+	<span>Парагвай</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Перу.jpg" onclick="showFullscreen('Перу')">	
+	<span>Перу</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Польша.jpg" onclick="showFullscreen('Польша')">	
+	<span>Польша</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Португалия.jpg" onclick="showFullscreen('Португалия')">	
+	<span>Португалия</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Приднестровская Молдавская Республика.jpg" onclick="showFullscreen('Приднестровская Молдавская Республика')">	
+	<span>Приднестровская Молдавская Республика</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Пуэрто-Рико.jpg" onclick="showFullscreen('Пуэрто-Рико')">	
+	<span>Пуэрто-Рико</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Россия.jpg" onclick="showFullscreen('Россия')">	
+	<span>Россия</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Руанда.jpg" onclick="showFullscreen('Руанда')">	
+	<span>Руанда</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Румыния.jpg" onclick="showFullscreen('Румыния')">	
+	<span>Румыния</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Сальвадор.jpg" onclick="showFullscreen('Сальвадор')">	
+	<span>Сальвадор</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Самоа.jpg" onclick="showFullscreen('Самоа')">	
+	<span>Самоа</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Сан-Марино.jpg" onclick="showFullscreen('Сан-Марино')">	
+	<span>Сан-Марино</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Сан-Томе и Принсипи.jpg" onclick="showFullscreen('Сан-Томе и Принсипи')">	
+	<span>Сан-Томе и Принсипи</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Саудовская Аравия.jpg" onclick="showFullscreen('Саудовская Аравия')">	
+	<span>Саудовская Аравия</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Сейшельские острова.jpg" onclick="showFullscreen('Сейшельские острова')">	
+	<span>Сейшельские острова</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Сенегал.jpg" onclick="showFullscreen('Сенегал')">	
+	<span>Сенегал</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Сент-Винсент и Гренадина.jpg" onclick="showFullscreen('Сент-Винсент и Гренадина')">	
+	<span>Сент-Винсент и Гренадина</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Сент-Китс и Невис.jpg" onclick="showFullscreen('Сент-Китс и Невис')">	
+	<span>Сент-Китс и Невис</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Сент-Люсия.jpg" onclick="showFullscreen('Сент-Люсия')">	
+	<span>Сент-Люсия</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Сербия.jpg" onclick="showFullscreen('Сербия')">	
+	<span>Сербия</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Сингапур.jpg" onclick="showFullscreen('Сингапур')">	
+	<span>Сингапур</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Сирия.jpg" onclick="showFullscreen('Сирия')">	
+	<span>Сирия</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Словакия.jpg" onclick="showFullscreen('Словакия')">	
+	<span>Словакия</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Словения.jpg" onclick="showFullscreen('Словения')">	
+	<span>Словения</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Соломоновы острова.jpg" onclick="showFullscreen('Соломоновы острова')">	
+	<span>Соломоновы острова</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Сомали.jpg" onclick="showFullscreen('Сомали')">	
+	<span>Сомали</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Судан.jpg" onclick="showFullscreen('Судан')">	
+	<span>Судан</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Суринам.jpg" onclick="showFullscreen('Суринам')">	
+	<span>Суринам</span>
+	    </div>
+<div class="blog-post">
+<img src="images/США.jpg" onclick="showFullscreen('США')">	
+	<span>США</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Сьерра-Леоне.jpg" onclick="showFullscreen('Сьерра-Леоне')">	
+	<span>Сьерра-Леоне</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Таджикистан.jpg" onclick="showFullscreen('Таджикистан')">	
+	<span>Таджикистан</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Таиланд.jpg" onclick="showFullscreen('Таиланд')">	
+	<span>Таиланд</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Тайвань.jpg" onclick="showFullscreen('Тайвань')">	
+	<span>Тайвань</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Танзания.jpg" onclick="showFullscreen('Танзания')">	
+	<span>Танзания</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Того.jpg" onclick="showFullscreen('Того')">	
+	<span>Того</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Тонга.jpg" onclick="showFullscreen('Тонга')">	
+	<span>Тонга</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Тринидад и Тобаго.jpg" onclick="showFullscreen('Тринидад и Тобаго')">	
+	<span>Тринидад и Тобаго</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Тувалу.jpg" onclick="showFullscreen('Тувалу')">	
+	<span>Тувалу</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Тунис.jpg" onclick="showFullscreen('Тунис')">	
+	<span>Тунис</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Туркменистан.jpg" onclick="showFullscreen('Туркменистан')">	
+	<span>Туркменистан</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Турция.jpg" onclick="showFullscreen('Турция')">	
+	<span>Турция</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Уганда.jpg" onclick="showFullscreen('Уганда')">	
+	<span>Уганда</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Узбекистан.jpg" onclick="showFullscreen('Узбекистан')">	
+	<span>Узбекистан</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Украина.jpg" onclick="showFullscreen('Украина')">	
+	<span>Украина</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Уругвай.jpg" onclick="showFullscreen('Уругвай')">	
+	<span>Уругвай</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Уэльса.jpg" onclick="showFullscreen('Уэльса')">	
+	<span>Уэльса</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Фарерские острова.jpg" onclick="showFullscreen('Фарерские острова')">	
+	<span>Фарерские острова</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Фиджи.jpg" onclick="showFullscreen('Фиджи')">	
+	<span>Фиджи</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Филиппины.jpg" onclick="showFullscreen('Филиппины')">	
+	<span>Филиппины</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Финляндия.jpg" onclick="showFullscreen('Финляндия')">	
+	<span>Финляндия</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Франция.jpg" onclick="showFullscreen('Франция')">	
+	<span>Франция</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Хорватия.jpg" onclick="showFullscreen('Хорватия')">	
+	<span>Хорватия</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Центрально-Африканская Республика.jpg" onclick="showFullscreen('Центрально-Африканская Республика')">	
+	<span>Центрально-Африканская Республика</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Чад.jpg" onclick="showFullscreen('Чад')">	
+	<span>Чад</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Черногория.jpg" onclick="showFullscreen('Черногория')">	
+	<span>Черногория</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Чехия.jpg" onclick="showFullscreen('Чехия')">	
+	<span>Чехия</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Чили.jpg" onclick="showFullscreen('Чили')">	
+	<span>Чили</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Швейцария.jpg" onclick="showFullscreen('Швейцария')">	
+	<span>Швейцария</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Швеция.jpg" onclick="showFullscreen('Швеция')">	
+	<span>Швеция</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Шотландия.jpg" onclick="showFullscreen('Шотландия')">	
+	<span>Шотландия</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Шри-Ланка.jpg" onclick="showFullscreen('Шри-Ланка')">	
+	<span>Шри-Ланка</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Эквадор.jpg" onclick="showFullscreen('Эквадор')">	
+	<span>Эквадор</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Экваториальная Гвинея.jpg" onclick="showFullscreen('Экваториальная Гвинея')">	
+	<span>Экваториальная Гвинея</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Эритрея.jpg" onclick="showFullscreen('Эритрея')">	
+	<span>Эритрея</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Эстония.jpg" onclick="showFullscreen('Эстония')">	
+	<span>Эстония</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Эфиопия.jpg" onclick="showFullscreen('Эфиопия')">	
+	<span>Эфиопия</span>
+	    </div>
+<div class="blog-post">
+<img src="images/ЮАР.jpg" onclick="showFullscreen('ЮАР')">	
+	<span>ЮАР</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Южная Корея.jpg" onclick="showFullscreen('Южная Корея')">	
+	<span>Южная Корея</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Южная Осетия.jpg" onclick="showFullscreen('Южная Осетия')">	
+	<span>Южная Осетия</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Южный Судан.jpg" onclick="showFullscreen('Южный Судан')">	
+	<span>Южный Судан</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Ямайка.jpg" onclick="showFullscreen('Ямайка')">	
+	<span>Ямайка</span>
+	    </div>
+<div class="blog-post">
+<img src="images/Япония.jpg" onclick="showFullscreen('Япония')">	
+	<span>Япония</span>
+</div>
+
+  </div>
+  <div id="fullscreen-overlay">
+    <img id="fullscreen-image" class="fullscreen-image" src="">
+  </div>
+  <script>
+    var fullscreenOverlay = document.getElementById('fullscreen-overlay');
+    var fullscreenImage = document.getElementById('fullscreen-image');
+    var countrySelect = document.getElementById('country-select');
+	function showFullscreen(imageName) {
+  fullscreenImage.src = 'images/' + imageName + '.jpg';
+  fullscreenOverlay.style.display = 'flex';
+}
+
+countrySelect.addEventListener('change', function() {
+  var selectedCountry = countrySelect.value;
+  var selectedImage = selectedCountry.toLowerCase();
+  showFullscreen(selectedImage);
+});
+
+fullscreenOverlay.addEventListener('click', function() {
+  fullscreenOverlay.style.display = 'none';
+});
+</script>
+</body>
+</html>

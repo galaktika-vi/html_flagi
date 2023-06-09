@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Таблица с 202 ячейками</title>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+
+    td {
+      border: 1px solid blue;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+  <table>
+    <tr>
+      <script>
+        var rows = 21;  
+        var columns = 10;  
+
+        var totalCells = rows * columns;  
+        var remainingCells = totalCells - 202;  
+        rows = Math.floor(202 / columns);  
+
+        var tableHTML = '';
+
+        for (var i = 0; i < rows; i++) {
+          tableHTML += '<tr>';
+          for (var j = 0; j < columns; j++) {
+            tableHTML += '<td></td>';
+          }
+          tableHTML += '</tr>';
+        }
+
+        document.write(tableHTML);
+      </script>
+       
+
+      
+    </tr>
+  </table>
+</body>
+</html>
+
